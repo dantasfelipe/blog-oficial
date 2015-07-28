@@ -10,16 +10,13 @@
 			<h1><a href="">Blog BFGeo</a></h1>
 		</div>
 
-		<div>
-			<p>publicado: 28/07/2015</p>
-			<h2><a href="">Meu primeiro Post</a></h2>
-			<p>a b c d e f t q w e re  t y y </p>
-		</div>
-
-		<div>
-			<p>publicado: 28/07/2015</p>
-			<h2><a href="">Meu 2º Post</a></h2>
-			<p>a b c d e f t q w e re  t y y </p>
-		</div>
+		{% for post in posts %}
+			<div>
+				<p>Publicado: {{ post.publicado_em }}</p>
+				<h1><a href="">{{ post.titulo }}</a></h1>
+				<p>{{ post.texto | linebreaks }}</p>
+			</div>
+		{% endfor %}
+		
 	</body>
 <html>
