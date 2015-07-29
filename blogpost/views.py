@@ -36,3 +36,17 @@ def post_edit(request, pk):
 	else:
 		form = PostForm(instance=post)
 	return render(request,'blogpost/post_edit.html', {'form':form})
+
+def post_draft_list(request):
+	posts = Post.objects.filter(publicado_em__isnull=True).order_by('criado_em')
+	return render(request, 'blogpost/post_draft_list.html', {'posts':posts})
+
+def post_publicar(request, pk):
+	post = get_object_or_404(Post, pk=pk)
+	post.publicar()
+	return redirect('blogpost.views.post_detail', pk=pk)
+
+def post_remove(request, pk):
+	post = get_object_or_404(Post, pk=pk)
+	post.delete()
+	return redirect('blogpost.views.post_list')
